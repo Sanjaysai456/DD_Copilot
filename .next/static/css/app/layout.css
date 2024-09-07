@@ -639,6 +639,9 @@ video {
 .max-w-sm {
   max-width: 24rem;
 }
+.max-w-md {
+  max-width: 28rem;
+}
 .items-center {
   align-items: center;
 }

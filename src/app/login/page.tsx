@@ -1,15 +1,20 @@
+// src/app/login/page.tsx
+
 "use client";
+
 import { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Update this import
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter(); // Update to useRouter from next/navigation
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/login', {
+      const response = await fetch('https://backend-zvmz.onrender.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -21,11 +26,12 @@ const Login = () => {
 
       if (response.ok) {
         alert('User login successful');
+        router.push('/dashboard'); // Redirect to a dashboard or home page
       } else if (response.status === 401) {
         alert('Invalid password');
       } else if (response.status === 404) {
         if (confirm("You're not registered, Register here")) {
-          window.location.href = '/signup';
+          router.push('/signup'); // Use router for navigation
         }
       } else {
         alert('An error occurred: ' + data.message);

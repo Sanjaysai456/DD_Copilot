@@ -1,4 +1,4 @@
-// File: C:\Python (Flask)\DD_Copilot\src\app\layout.tsx
+// File: T:\WEBSITES\my app\DD_Copilot\src\app\layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

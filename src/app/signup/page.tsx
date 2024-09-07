@@ -1,16 +1,19 @@
+// src/components/Register.tsx
+
 "use client";
+
 import { useState } from 'react';
 
-const SignUp = () => {
+const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignUp = async (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/register', {
+      const response = await fetch('https://backend-zvmz.onrender.com/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -18,11 +21,16 @@ const SignUp = () => {
         body: JSON.stringify({ name, email, password }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         alert('User registration successful');
+        // Optionally clear the form
+        setName('');
+        setEmail('');
+        setPassword('');
       } else {
-        const data = await response.json();
-        alert('An error occurred: ' + data.message);
+        alert('Error: ' + data.message);
       }
     } catch (error) {
       alert('An error occurred: ' + error.message);
@@ -31,9 +39,9 @@ const SignUp = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-sm p-6 bg-white rounded-md shadow-md">
+      <div className="w-full max-w-md p-6 bg-white rounded-md shadow-md">
         <h2 className="mb-6 text-2xl font-bold text-center text-gray-800">Register</h2>
-        <form onSubmit={handleSignUp}>
+        <form onSubmit={handleRegister}>
           <div className="mb-4">
             <label className="block mb-2 text-sm font-medium text-gray-600" htmlFor="name">
               Name
@@ -85,4 +93,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Register;
